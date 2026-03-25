@@ -1,91 +1,183 @@
-PHAN I SETUP
+**PART I: SETUP**
 
-Tạo project Node.js
+**Create a Node.js project**
 
+```bash
 mkdir jitsu-appium-tests && cd jitsu-appium-tests
 npm init -y
+```
 
+**Install main dependencies**
 
-Cài dependencies chính
-
+```bash
 npm install --save-dev @wdio/cli @wdio/local-runner @wdio/mocha-framework @wdio/appium-service appium appium-uiautomator2-driver typescript ts-node @types/node @wdio/cucumber-framework
+```
 
-Cài APK:
+**Install APK**
 
+```bash
 C:\Users\Window 10\AppData\Local\Android\Sdk
 adb install "C:\AllInOne\AuoTest\AppiumAuto\app-staging-release.apk"
+```
 
+---
 
-PHAN 2 RUN
-Mình đang vọc automation test bằng appium + ts, đã làm được 3 step 1,2,3. Hãy hướng dẫn mình step 4 viết code bằng ts để test application Jitsu đã được mình install vào phone ảo
-Chuẩn bị device:
-Về màn hình app (nút hình chữ nhật >> đòng app Jitsu
-Log in vào Jitsu >> click dấu ... >> log out
-Xoá cache: Click vào button ở phí trên màn hình.
+**PART II: RUN**
 
-Mở cmd window
-1. Start emulator: Để bật semulator (phone ảo)
+I am practicing automation testing with Appium + TypeScript and have completed steps 1, 2, and 3. Please guide me on step 4: writing TypeScript code to test the Jitsu application that has been installed on the emulator.
 
+**Prepare the device:**
+
+* Go to the app screen (rectangle button >> close the Jitsu app)
+* Log in to Jitsu >> click "..." >> log out
+* Clear cache: click the button at the top of the screen
+
+---
+
+**Open Command Prompt**
+
+**1. Start emulator (virtual phone):**
+
+```bash
 emulator -avd "Appium_Pixel_8" -no-snapshot -no-boot-anim -noaudio -delay-adb -gpu off
+```
 
-note:
-Nếu lỗi thì Kill sạch emulator + adb rồi mở lại
-Chạy lần lượt:
+**Note:**
+If there is an error, kill all emulator + adb processes and restart:
+
+```bash
 adb kill-server
 taskkill /IM adb.exe /F
 taskkill /IM emulator.exe /F
 taskkill /IM qemu-system-x86_64.exe /F
-Kiểm tra 
+```
+
+Check device:
+
+```bash
 adb devices
-Nếu thấy:
+```
+
+If you see:
+
+```
 emulator-5554   device
-Là device đã lên
+```
 
-2. Start appium:
-cmd: chạy appium
+→ the device is ready
 
-3. Appium Inspector (mở app Appium)
-mớ para có sẵn vile hoặc jitsu rồi chạy sẽ kết nối với semulator (phone ảo)
-Có thể localor elements
+---
 
-4. run test:
-Chạy VS code >> mở folder C:\AllInOne\AuoTest\jitsu-appium-ts
+**2. Start Appium**
+Run in cmd:
 
-(folder C:\AllInOne\AuoTest\jitsu-appium-tests là folder đang restructure)
+```bash
+appium
+```
 
+---
 
+**3. Appium Inspector**
+
+* Open the Appium app
+* Use existing parameters (vile or jitsu) to connect to the emulator
+* You can locate elements
+
+---
+
+**4. Run test**
+
+Open VS Code → open folder:
+
+```
+C:\AllInOne\AuoTest\jitsu-appium-ts
+```
+
+(Note: `C:\AllInOne\AuoTest\jitsu-appium-tests` is the restructuring folder)
+
+Run:
+
+```bash
 $env:TS_NODE_TRANSPILE_ONLY=1
 npx wdio run ./wdio.conf.ts --ignore-cached
+```
 
-chạy 1 file: npx wdio run wdio.conf.ts --spec test/specs/jitsu.route.test.ts
+Run a specific file:
 
-hoặc:
+```bash
+npx wdio run wdio.conf.ts --spec test/specs/jitsu.route.test.ts
+```
+
+Or:
+
+```bash
 npm run wdio
-hoặc:
+```
+
+Or:
+
+```bash
 npx wdio run wdio.conf.ts
+```
 
+---
+
+**Check APK info:**
+
+```bash
 & "C:\Users\Window 10\AppData\Local\Android\Sdk\build-tools\36.0.0\aapt.exe" dump badging "C:\AllInOne\AuoTest\AppiumAuto\app-staging-release.apk" | findstr "SdkVersion"
+```
 
+---
 
-Xoá cache:
+**Clear cache:**
+
+```bash
 Remove-Item -Recurse -Force .\node_modules\.cache
 Remove-Item -Recurse -Force .\dist
+```
 
-phải cài thêm để loại bỏ lỗi TS2554:
+---
+
+**Fix TS2554 error:**
+
+```bash
 npm install --save-dev @cucumber/cucumber@^9
+```
 
-element:
-Start Tutorial có class = android.widget.Button
+---
 
+**Element:**
 
-tai sao lần đầu chạy:
+* “Start Tutorial” has class = `android.widget.Button`
+
+---
+
+**Question:**
+Why does it work the first time when running:
+
+```bash
 emulator -avd "Appium_Pixel_8" -no-snapshot -no-boot-anim -noaudio -delay-adb
-rồi chạy lệnh này thì cài được APK luôn:
+```
+
+and then running:
+
+```bash
 aapt dump badging "C:\AllInOne\AuoTest\AppiumAuto\app-staging-release.apk" | findstr "SdkVersion"
+```
 
-nhưng sau đo mình chạy:
+(the APK gets installed automatically),
+
+but after running:
+
+```bash
 adb uninstall com.axlehire.drive.staging
+```
 
-rồi chạy lại aapt dump badging "C:\AllInOne\AuoTest\AppiumAuto\app-staging-release.apk" | findstr "SdkVersion"
-thì cứ thấy treo không cài app Jitsu vào device 
+and then running again:
 
+```bash
+aapt dump badging "C:\AllInOne\AuoTest\AppiumAuto\app-staging-release.apk" | findstr "SdkVersion"
+```
+
+it hangs and does not install the Jitsu app on the device?
