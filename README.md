@@ -24,8 +24,6 @@ adb install "C:\AllInOne\AuoTest\AppiumAuto\app-staging-release.apk"
 
 **PART II: RUN**
 
-I am practicing automation testing with Appium + TypeScript and have completed steps 1, 2, and 3. Please guide me on step 4: writing TypeScript code to test the Jitsu application that has been installed on the emulator.
-
 **Prepare the device:**
 
 * Go to the app screen (rectangle button >> close the Jitsu app)
