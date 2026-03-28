@@ -105,7 +105,9 @@ Run a specific file:
 ```bash
 npx wdio run wdio.conf.ts --spec test/specs/jitsu.route.test.ts
 ```
-
+Run some test cases "negative" for example:
+```
+npx wdio run wdio.conf.ts --spec test/specs/jitsu.MultiAccounts.test.ts --mochaOpts.grep="@negative"
 Or:
 
 ```bash
