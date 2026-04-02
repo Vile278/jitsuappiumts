@@ -120,7 +120,7 @@ Or:
 npx wdio run wdio.conf.ts
 ```
 
-**4. Generate report**
+**5. Generate report**
 ```
 Generate report:
 npx allure generate allure-results --clean
