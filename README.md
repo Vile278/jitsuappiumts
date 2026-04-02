@@ -119,8 +119,14 @@ Or:
 ```bash
 npx wdio run wdio.conf.ts
 ```
-Generate report
+
+**4. Generate report**
+```
+Generate report:
 npx allure generate allure-results --clean
+```
+Open the report
+```
 npx allure open
 ---
 
