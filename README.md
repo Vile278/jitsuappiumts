@@ -121,16 +121,15 @@ npx wdio run wdio.conf.ts
 ```
 
 **5. Generate report**
-```
 Generate report:
-```
+```bash
 npx allure generate allure-results --clean
-```
+
 Open the report
-```
+```bash
 npx allure open
+
 ---
-```
 **Check APK info:**
 
 ```bash
