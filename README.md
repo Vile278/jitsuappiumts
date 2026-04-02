@@ -119,7 +119,9 @@ Or:
 ```bash
 npx wdio run wdio.conf.ts
 ```
-
+Generate report
+npx allure generate allure-results --clean
+npx allure open
 ---
 
 **Check APK info:**
